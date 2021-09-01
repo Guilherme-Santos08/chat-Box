@@ -7,8 +7,8 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    color: white;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
+    padding: 0 10px;
   }
 `;
