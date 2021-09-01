@@ -1,5 +1,5 @@
-import { MessageReceived } from "../MessageReceived";
-import { MessageSent } from "../MessageSent";
+import { MessageReceived } from "../../components/MessageReceived";
+import { MessageSent } from "../../components/MessageSent";
 import { ChatBox } from "./styles";
 
 export function Chat() {
