@@ -1,19 +1,11 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import useAuth from "./hooks/useAuth";
 import { Chat } from "./pages/Chat";
 import { Login } from "./pages/Login";
 
 function App() {
-  return (
-    <>
-      <Router>
-        <Switch>
-          <Route path="/" exact render={() => <Login />} />
-          <Route path="/chat" exact render={() => <Chat />} />
-        </Switch>
-      </Router>
-    </>
-  );
+  const { chat } = useAuth();
+
+  return <>{chat ? <Chat /> : <Login />}</>;
 }
 
 export default App;

@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
+import cookie from "js-cookie";
 
 import firebase from "../lib/firebase";
 
@@ -15,20 +16,31 @@ const formatUser = async (user) => ({
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-
-  if (user) {
-  }
-
+  const [chat, setChat] = useState(false);
+  const history = useHistory();
   console.log(user);
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
       const formatedUser = await formatUser(currentUser);
       setUser(formatedUser);
+      setSession(true);
+      setChat(true);
       return formatedUser.email;
     }
     setUser(false);
+    setSession(false);
     return false;
+  };
+
+  const setSession = (session) => {
+    if (session) {
+      cookie.set("Dz-auth", session, {
+        expires: 1,
+      });
+    } else {
+      cookie.remove("Dz-auth");
+    }
   };
 
   const signinGoogle = async () => {
@@ -39,16 +51,19 @@ export function AuthProvider({ children }) {
       handleUser(response.user);
     } catch {
       return;
-    } finally {
-      <Redirect to="/chat" />;
-
     }
   };
+  
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
+    return () => unsubscribe();
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         signinGoogle,
+        chat,
       }}
     >
       {children}
