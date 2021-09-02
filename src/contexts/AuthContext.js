@@ -1,8 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+// import { Redirect, useHistory } from "react-router-dom";
 import cookie from "js-cookie";
 
-import firebase from "../lib/firebase";
+import { database, firebase } from "../lib/firebase";
 
 const AuthContext = createContext();
 
@@ -11,14 +11,16 @@ const formatUser = async (user) => ({
   email: user.email,
   name: user.displayName,
   token: user.za,
-  photoUrl: user.photoURL,
+  photo: user.photoURL,
 });
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState(false);
-  const history = useHistory();
-  console.log(user);
+  const [newMessage, setNewMessage] = useState("");
+  console.log(newMessage);
+
+  // const history = useHistory();
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
@@ -31,6 +33,25 @@ export function AuthProvider({ children }) {
     setUser(false);
     setSession(false);
     return false;
+  };
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    if (newMessage.trim() === "") {
+      return;
+    }
+
+    const message = {
+      content: newMessage,
+      author: {
+        name: user.name,
+        avatar: user.photo,
+        id: user.uid,
+      },
+    };
+
+    await database.ref(`chat/${user.uid}/messages`).push(message)
+    setNewMessage("");
   };
 
   const setSession = (session) => {
@@ -58,7 +79,7 @@ export function AuthProvider({ children }) {
     try {
       await firebase.auth().signOut();
       handleUser(false);
-      setChat(false)
+      setChat(false);
     } catch {
       return;
     }
@@ -73,9 +94,12 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         signinGoogle,
+        signout,
+        setNewMessage,
+        newMessage,
+        handleSendMessage,
         chat,
         user,
-        signout
       }}
     >
       {children}
