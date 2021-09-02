@@ -53,7 +53,17 @@ export function AuthProvider({ children }) {
       return;
     }
   };
-  
+
+  const signout = async () => {
+    try {
+      await firebase.auth().signOut();
+      handleUser(false);
+      setChat(false)
+    } catch {
+      return;
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
     return () => unsubscribe();
@@ -64,6 +74,8 @@ export function AuthProvider({ children }) {
       value={{
         signinGoogle,
         chat,
+        user,
+        signout
       }}
     >
       {children}
