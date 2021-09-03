@@ -18,9 +18,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState(false);
   const [newMessage, setNewMessage] = useState("");
-  console.log(newMessage);
-
-  // const history = useHistory();
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
@@ -43,14 +40,12 @@ export function AuthProvider({ children }) {
 
     const message = {
       content: newMessage,
-      author: {
-        name: user.name,
-        avatar: user.photo,
-        id: user.uid,
-      },
+      name: user.name,
+      avatar: user.photo,
+      id: user.uid,
     };
 
-    await database.ref(`chat/${user.uid}/messages`).push(message)
+    await database.ref(`chat/${user.uid}/message`).push(message);
     setNewMessage("");
   };
 
@@ -89,6 +84,12 @@ export function AuthProvider({ children }) {
     const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    new firebase.database().ref("/chat").on("value", (snapshot) => {
+      console.log("User data: ", snapshot.val());
+    });
+  });
 
   return (
     <AuthContext.Provider
