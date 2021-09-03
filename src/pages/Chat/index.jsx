@@ -5,8 +5,22 @@ import { ChatBox } from "./styles";
 import useAuth from "../../hooks/useAuth";
 
 export function Chat({ name }) {
-  const { user, signout, setNewMessage, newMessage, handleSendMessage } = useAuth();
-  // console.log(user);
+  const {
+    user,
+    signout,
+    setNewMessage,
+    newMessage,
+    handleSendMessage,
+    dateDatase,
+  } = useAuth();
+
+  const messageSentorReceived = (e) => {
+    if (e === user.id) {
+      return <MessageReceived />;
+    } else {
+      return <MessageSent />;
+    }
+  };
 
   return (
     <ChatBox>
@@ -20,11 +34,7 @@ export function Chat({ name }) {
         <div className="chat">
           <h2>Dz ChatBox</h2>
           <div className="messages">
-            <MessageReceived />
-            <MessageSent />
-            <MessageSent />
-            <MessageSent />
-            <MessageSent />
+            {dateDatase.map((e) => messageSentorReceived(e.uid))}
           </div>
           <div className="input">
             <textarea

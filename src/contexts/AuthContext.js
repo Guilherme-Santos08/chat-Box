@@ -17,9 +17,10 @@ const formatUser = async (user) => ({
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState(false);
+  const [dateDatase, setDateBase] = useState([]);
+
+  // console.log(dateDatase);
   const [newMessage, setNewMessage] = useState("");
-  const [dateBase, setDateBase] = useState();
-  console.log(dateBase)
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
@@ -91,7 +92,6 @@ export function AuthProvider({ children }) {
     const chatRef = firebase.database().ref("/chat");
     chatRef.on("value", (snapshot) => {
       snapshot.forEach((childSnap) => {
-        console.log(childSnap.key);
         const teste2 = childSnap.val().message ?? {};
 
         const parsedMessage = Object.entries(teste2).map(([key, value]) => {
@@ -103,13 +103,13 @@ export function AuthProvider({ children }) {
             avatar: value.avatar,
           };
         });
-        setDateBase(parsedMessage)
+        setDateBase(parsedMessage);
       });
       return () => {
-        chatRef.off("value")
-      }
+        chatRef.off("value");
+      };
     });
-  }, []);
+  }, [user?.id]);
 
   return (
     <AuthContext.Provider
@@ -121,6 +121,7 @@ export function AuthProvider({ children }) {
         handleSendMessage,
         chat,
         user,
+        dateDatase,
       }}
     >
       {children}
