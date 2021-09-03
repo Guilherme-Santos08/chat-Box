@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState(false);
   const [newMessage, setNewMessage] = useState("");
+  const [dateBase, setDateBase] = useState()
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
@@ -86,9 +87,30 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    new firebase.database().ref("/chat").on("value", (snapshot) => {
-      console.log("User data: ", snapshot.val());
-    });
+    const teste = firebase
+      .database()
+      .ref("/chat")
+      .on("value", (snapshot) => {
+        snapshot.forEach((childSnap) => {
+          console.log(childSnap.key);
+          const teste2 = childSnap.val().message ?? {};
+
+          console.log(Object.entries(teste2).map(([key, value]) => {
+            return {
+              id: key,
+              name: value.name,
+              uid: value.id,
+              content: value.content,
+              avatar: value.avatar,
+            }
+            })
+          );
+        });
+      });
+    // .on("child_added", (snapshot) => {
+    //   console.log(snapshot.key, snapshot.val().message);
+    //   // console.log("User data: ", snapshot.val());
+    // });
   });
 
   return (
