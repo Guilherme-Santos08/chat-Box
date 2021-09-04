@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-// import { Redirect, useHistory } from "react-router-dom";
 import cookie from "js-cookie";
 
 import { database, firebase, auth } from "../lib/firebase";
@@ -81,10 +80,10 @@ export function AuthProvider({ children }) {
     }
   };
 
-  useEffect(() => {
-    const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
-    return () => unsubscribe();
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
+  //   return () => unsubscribe();
+  // }, []);
 
   useEffect(() => {
     const todoRef = firebase.database().ref("message");
