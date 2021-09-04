@@ -11,16 +11,8 @@ export function Chat({ name }) {
     setNewMessage,
     newMessage,
     handleSendMessage,
-    dateDatase,
+    dateDatabese,
   } = useAuth();
-
-  const messageSentorReceived = (e) => {
-    if (e === user.id) {
-      return <MessageReceived />;
-    } else {
-      return <MessageSent />;
-    }
-  };
 
   return (
     <ChatBox>
@@ -34,7 +26,7 @@ export function Chat({ name }) {
         <div className="chat">
           <h2>Dz ChatBox</h2>
           <div className="messages">
-            {dateDatase.map((e) => messageSentorReceived(e.uid))}
+            {/* Renderizar Componentes */}
           </div>
           <div className="input">
             <textarea

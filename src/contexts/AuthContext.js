@@ -17,9 +17,9 @@ const formatUser = async (user) => ({
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState(false);
-  const [dateDatase, setDateBase] = useState([]);
+  const [dateDatabese, setDateBase] = useState([]);
 
-  // console.log(dateDatase);
+  // console.log(dateDatabese);
   const [newMessage, setNewMessage] = useState("");
 
   const handleUser = async (currentUser) => {
@@ -43,8 +43,8 @@ export function AuthProvider({ children }) {
 
     const message = {
       content: newMessage,
-      name: user.name,
-      avatar: user.photo,
+      // name: user.name,
+      // avatar: user.photo,
       id: user.uid,
     };
 
@@ -106,7 +106,7 @@ export function AuthProvider({ children }) {
         setDateBase(parsedMessage);
       });
       return () => {
-        chatRef.off("value");
+        // chatRef.off("value");
       };
     });
   }, [user?.id]);
@@ -121,7 +121,7 @@ export function AuthProvider({ children }) {
         handleSendMessage,
         chat,
         user,
-        dateDatase,
+        dateDatabese,
       }}
     >
       {children}
