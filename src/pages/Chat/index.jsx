@@ -5,8 +5,15 @@ import { ChatBox } from "./styles";
 import useAuth from "../../hooks/useAuth";
 
 export function Chat({ name }) {
-  const { user, signout, setNewMessage, newMessage } = useAuth();
-
+  const {
+    user,
+    signout,
+    setNewMessage,
+    newMessage,
+    handleSendMessage,
+    dateDatabese,
+  } = useAuth();
+  
   return (
     <ChatBox>
       <header>
@@ -28,7 +35,7 @@ export function Chat({ name }) {
               value={newMessage}
               placeholder="Digite sua menssagem"
             />
-            {/* <button>Enviar Menssagem</button> */}
+            <button onClick={handleSendMessage}>Enviar Menssagem</button>
           </div>
         </div>
       </div>
