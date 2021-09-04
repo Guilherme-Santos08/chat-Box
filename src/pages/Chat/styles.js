@@ -62,9 +62,12 @@ export const ChatBox = styled.div`
       }
 
       .messages {
-        /* display: flex;
-      flex-direction: column;
-      justify-content: center; */
+        /* display: flex; */
+        /* justify-content: space-between; */
+        /* align-items: stretch; */
+        /* flex-direction: column; */
+        /*
+      /* justify-content: center; */
         width: 90%;
         height: 74%;
         margin: auto;

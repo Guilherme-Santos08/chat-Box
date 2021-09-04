@@ -3,6 +3,7 @@ import { MessageSent } from "../../components/MessageSent";
 import { ChatBox } from "./styles";
 
 import useAuth from "../../hooks/useAuth";
+import { MessageScrollBottom } from "../../components/MessageScrollBottom";
 
 export function Chat({ name }) {
   const {
@@ -13,7 +14,7 @@ export function Chat({ name }) {
     handleSendMessage,
     dateDatabese,
   } = useAuth();
-  
+
   return (
     <ChatBox>
       <header>
@@ -26,8 +27,17 @@ export function Chat({ name }) {
         <div className="chat">
           <h2>Dz ChatBox</h2>
           <div className="messages">
-            <MessageReceived />
-            <MessageSent />
+            <MessageScrollBottom
+              messages={dateDatabese.map(
+                (message, index) =>
+                  message.id === user.uid ? (
+                    <MessageSent key={index} message={message.content} />
+                  ) : (
+                    <MessageReceived key={index} message={message.content} />
+                  )
+                // <MessageReceived key={index} />
+              )}
+            />
           </div>
           <div className="input">
             <textarea

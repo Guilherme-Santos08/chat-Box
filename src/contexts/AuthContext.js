@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 // import { Redirect, useHistory } from "react-router-dom";
 import cookie from "js-cookie";
 
-import { database, firebase } from "../lib/firebase";
+import { database, firebase, auth } from "../lib/firebase";
 
 const AuthContext = createContext();
 
@@ -41,12 +41,12 @@ export function AuthProvider({ children }) {
 
     const message = {
       content: newMessage,
-      // name: user.name,
-      // avatar: user.photo,
+      name: user.name,
+      avatar: user.photo,
       id: user.uid,
     };
 
-    await database.ref(`chat/${user.uid}/message`).push(message);
+    await database.ref(`/message`).push(message);
     setNewMessage("");
   };
 
@@ -62,10 +62,10 @@ export function AuthProvider({ children }) {
 
   const signinGoogle = async () => {
     try {
-      const response = await firebase
-        .auth()
-        .signInWithPopup(new firebase.auth.GoogleAuthProvider());
-      handleUser(response.user);
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+    const result = await auth.signInWithPopup(provider);
+      handleUser(result.user);
     } catch {
       return;
     }
@@ -87,27 +87,17 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const chatRef = firebase.database().ref("/chat");
-    chatRef.on("value", (snapshot) => {
-      snapshot.forEach((childSnap) => {
-        const teste2 = childSnap.val().message ?? {};
-
-        const parsedMessage = Object.entries(teste2).map(([key, value]) => {
-          return {
-            id: key,
-            name: value.name,
-            uid: value.id,
-            content: value.content,
-            avatar: value.avatar,
-          };
-        });
-        setDateBase(parsedMessage);
-      });
-      return () => {
-        // chatRef.off("value");
-      };
+    const todoRef = firebase.database().ref("message");
+    todoRef.on("value", (snapshot) => {
+      const todos = snapshot.val();
+      const messageList = [];
+      for (let id in todos) {
+        messageList.push({ id, ...todos[id] });
+      }
+      setDateBase(messageList);
+      console.log("messageList->", messageList);
     });
-  }, [user?.id]);
+  }, []);
 
   return (
     <AuthContext.Provider

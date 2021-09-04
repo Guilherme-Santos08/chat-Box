@@ -1,5 +1,5 @@
 import { MessageContainer } from "./styles";
 
-export function MessageSent() {
-  return <MessageContainer>Hello World!!</MessageContainer>;
+export function MessageSent({ message }) {
+  return <MessageContainer>{message}</MessageContainer>;
 }
