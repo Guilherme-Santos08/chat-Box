@@ -17,9 +17,6 @@ const formatUser = async (user) => ({
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [chat, setChat] = useState(false);
-  const [dateDatabese, setDateBase] = useState([]);
-
-  // console.log(dateDatabese);
   const [newMessage, setNewMessage] = useState("");
 
   const handleUser = async (currentUser) => {
@@ -33,23 +30,6 @@ export function AuthProvider({ children }) {
     setUser(false);
     setSession(false);
     return false;
-  };
-
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (newMessage.trim() === "") {
-      return;
-    }
-
-    const message = {
-      content: newMessage,
-      // name: user.name,
-      // avatar: user.photo,
-      id: user.uid,
-    };
-
-    await database.ref(`chat/${user.uid}/message`).push(message);
-    setNewMessage("");
   };
 
   const setSession = (session) => {
@@ -88,29 +68,6 @@ export function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    const chatRef = firebase.database().ref("/chat");
-    chatRef.on("value", (snapshot) => {
-      snapshot.forEach((childSnap) => {
-        const teste2 = childSnap.val().message ?? {};
-
-        const parsedMessage = Object.entries(teste2).map(([key, value]) => {
-          return {
-            id: key,
-            name: value.name,
-            uid: value.id,
-            content: value.content,
-            avatar: value.avatar,
-          };
-        });
-        setDateBase(parsedMessage);
-      });
-      return () => {
-        // chatRef.off("value");
-      };
-    });
-  }, [user?.id]);
-
   return (
     <AuthContext.Provider
       value={{
@@ -118,10 +75,8 @@ export function AuthProvider({ children }) {
         signout,
         setNewMessage,
         newMessage,
-        handleSendMessage,
         chat,
         user,
-        dateDatabese,
       }}
     >
       {children}

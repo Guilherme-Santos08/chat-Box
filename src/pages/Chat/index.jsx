@@ -5,14 +5,7 @@ import { ChatBox } from "./styles";
 import useAuth from "../../hooks/useAuth";
 
 export function Chat({ name }) {
-  const {
-    user,
-    signout,
-    setNewMessage,
-    newMessage,
-    handleSendMessage,
-    dateDatabese,
-  } = useAuth();
+  const { user, signout, setNewMessage, newMessage } = useAuth();
 
   return (
     <ChatBox>
@@ -26,7 +19,8 @@ export function Chat({ name }) {
         <div className="chat">
           <h2>Dz ChatBox</h2>
           <div className="messages">
-            {/* Renderizar Componentes */}
+            <MessageReceived />
+            <MessageSent />
           </div>
           <div className="input">
             <textarea
@@ -34,7 +28,7 @@ export function Chat({ name }) {
               value={newMessage}
               placeholder="Digite sua menssagem"
             />
-            <button onClick={handleSendMessage}>Enviar Menssagem</button>
+            {/* <button>Enviar Menssagem</button> */}
           </div>
         </div>
       </div>
