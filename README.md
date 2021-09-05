@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+## ChatBox contem autenticação e realtime databese
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O que eu aprendi até aqui?
+- Autenticação com firebase
+- Usar um pouco do Realtime database
+- Colocar dados no realtime databese e pegar os dados do realtime databese
+- pude colocar o context em prática (Distribuir informações do usuário para todo o site)
 
-## Available Scripts
 
-In the project directory, you can run:
+## 💈 Padrões de emojis
 
-### `yarn start`
+<table>
+  <thead>
+    <tr>
+      <th>Tipo de commit</th>
+      <th>Emojis</th>
+    </tr>
+  </thead>
+ <tbody>
+    <tr>
+      <td>Commit inicial</td>
+      <td> 🎉 <code>:tada:</code>   </td>
+    </tr>
+    <tr>
+      <td> Tag de versão  </td>
+      <td> 🔖 <code>:bookmark:</code>   </td>
+    </tr>
+    <tr>
+      <td>  Novo recurso   </td>
+      <td> ✨ <code>:sparkles:</code>   </td>
+    </tr>
+    <tr>
+      <td>  Lista de ideias (tasks)    </td>
+      <td> 🔜 <code> :soon: </code>   </td>
+    </tr>
+    <tr>
+      <td>  Bugfix  </td>
+      <td> 🐛 <code>:bug:</code>   </td>
+    </tr>
+    <tr>
+      <td>  Documentação  </td>
+      <td> 📚 <code>:books:</code>   </td>
+    </tr>
+    <tr>
+      <td>  Testes  </td>
+      <td> 🧪 <code>:test_tube: </code>   </td>
+    </tr>
+    <tr>
+      <td>Adicionando um teste</td>
+      <td> ✅ <code> :white_check_mark: </code>   </td>
+    </tr>
+    <tr>
+      <td> Teste de aprovação </td>
+      <td> ✔️ <code> :heavy_check_mark: </code>   </td>
+    </tr>
+    <tr>
+      <td>  Acessibilidade    </td>
+      <td> ♿ <code> :wheelchair: </code>   </td>
+    </tr>
+    <tr>
+      <td>  Texto     </td>
+      <td> 📝 <code> :pencil: </code>   </td>
+    </tr>
+    <tr>
+      <td>  Package.json em JS      </td>
+      <td> 📦 <code> :package: </code>   </td>
+    </tr>
+    <tr>
+      <td>  Em progresso        </td>
+      <td> 🚧 <code> :construction: </code>   </td>
+    </tr>
+    <tr>
+      <td>   Arquivos de configuração        </td>
+      <td> 🔧 <code> :wrench: </code>   </td>
+    </tr>
+    <tr>
+      <td>   Removendo uma dependência        </td>
+      <td> ➖ <code> :heavy_minus_sign: </code>   </td>
+    </tr>
+    <tr>
+      <td>   Adicionando uma dependência        </td>
+      <td> ➕ <code> :heavy_plus_sign: </code>   </td>
+    </tr>
+    <tr>
+      <td>   Revertendo mudanças         </td>
+      <td> 💥 <code> :boom: </code>   </td>
+    </tr>
+    <tr>
+      <td>   Alterações de revisão de código        </td>
+      <td> 👌 <code> :ok_hand: </code>   </td>
+    </tr>
+   <tr>
+      <td>   Refatoração        </td>
+      <td> ♻️ <code> :recycle: </code>   </td>
+   </tr>
+    <tr>
+      <td>   Mover/Renomear        </td>
+      <td> 🚚 <code> :truck: </code>   </td>
+    </tr>
+  </tbody>
+</table>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Tabela tirada do repositório:
+[IuriCode](https://github.com/iuricode/padroes-de-commits/blob/main/README.md)
