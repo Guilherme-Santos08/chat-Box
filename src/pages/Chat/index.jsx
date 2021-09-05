@@ -1,5 +1,5 @@
-import { MessageReceived } from "../../components/MessageReceived";
-import { MessageSent } from "../../components/MessageSent";
+import { MessageReceived } from "../../components/Messages";
+import { MessageSent } from "../../components/Messages";
 import { ChatBox } from "./styles";
 
 import useAuth from "../../hooks/useAuth";
@@ -23,29 +23,12 @@ export function Chat({ name }) {
           <button onClick={() => signout()}>Deslogar</button>
         </ul>
       </header>
-      <div className="teste">
-        <div className="chat">
-          <h2>Dz ChatBox</h2>
-          <div className="messages">
-            <MessageScrollBottom
-              messages={dateDatabese.map(
-                (message, index) =>
-                  message.id === user.uid ? (
-                    <MessageSent key={index} message={message.content} />
-                  ) : (
-                    <MessageReceived key={index} message={message.content} />
-                  )
-                // <MessageReceived key={index} />
-              )}
-            />
-          </div>
-          <div className="input">
-            <textarea
-              onChange={(e) => setNewMessage(e.target.value)}
-              value={newMessage}
-              placeholder="Digite sua menssagem"
-            />
-            <button onClick={handleSendMessage}>Enviar Menssagem</button>
+
+      <div className="container">
+        <div className="">
+          <div className="chat">
+            <MessageReceived message="Veio" />
+            <MessageSent message="Foi" />
           </div>
         </div>
       </div>

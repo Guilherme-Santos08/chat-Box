@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const ChatBox = styled.div`
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
+
   header {
     display: flex;
     align-items: center;
@@ -12,9 +12,10 @@ export const ChatBox = styled.div`
     padding: 30px;
     background-color: #333456;
 
-    position: fixed;
-    right: 0;
-    left: 0;
+    /* position: ; */
+    /* right: 0; */
+    /* left: 0; */
+    /* z-index: 999; */
     span {
       font-size: 1.5rem;
       font-weight: bold;
@@ -37,75 +38,33 @@ export const ChatBox = styled.div`
     }
   }
 
-  .teste {
-    font-size: 30px;
-    width: 100%;
-    margin-top: 130px;
+  .container {
+    /* width: 100%; */
+    /* min-height: 50vh; */
+    /* background-color: #fff; */
+    /* max-width: 1100px */
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 15px;
+    margin: 30px 10px;
 
-    .chat {
-      min-width: 300px;
-      width: 500px;
-      height: 554px;
-
-      background-color: #595b83;
-      border-radius: 12px;
-      position: relative;
-
-      h2 {
-        font-size: 2rem;
-        color: #fff;
-        padding: 20px 24px;
-      }
-
-      .messages {
-        /* display: flex; */
-        /* justify-content: space-between; */
-        /* align-items: stretch; */
-        /* flex-direction: column; */
-        /*
-      /* justify-content: center; */
-        width: 90%;
-        height: 74%;
-        margin: auto;
-        border-radius: 12px;
-        background-color: #eee;
-        padding: 20px 15px;
-        position: relative;
-        overflow-y: auto !important;
-
-        .talk {
-          height: 100%;
-          overflow-y: auto !important;
-          div:last-child {
-            margin-bottom: 100px;
-          }
-        }
-      }
-
-      .input {
-        bottom: 1rem;
-        right: 1rem;
-        margin-top: 10px;
+    > div {
+      max-width: 1100px;
+      margin: 0 auto;
+      .chat {
         display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding: 0px 24px;
+        justify-content: flex-start;
+        flex-direction: column;
 
-        textarea {
-          resize: none; /* impede que o próprio usuário altere o tamanho do textarea */
-          width: 200px;
-          height: 50px;
-          padding: 10px;
-          font-size: 0.8rem;
+        width: 100%;
+        max-height: 100vh;
+        background-color: #fff;
 
-          border: 1px solid black;
-          border-radius: 8px;
-          overflow-y: auto;
-          outline: none;
+        padding: 18px;
+        margin: 0 auto;
+        border: 1px solid red;
+
+        article + article {
+          margin-top: 10px;
         }
       }
     }
