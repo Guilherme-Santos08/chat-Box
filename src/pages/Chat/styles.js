@@ -57,7 +57,7 @@ export const ChatBox = styled.div`
 
         width: 100%;
         max-height: 100vh;
-        background-color: #fff;
+        background-color: #eee;
 
         padding: 18px;
         margin: 0 auto;

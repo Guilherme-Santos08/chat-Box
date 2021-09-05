@@ -28,7 +28,7 @@ export function Chat({ name }) {
         <div className="">
           <div className="chat">
             <MessageReceived message="Veio" />
-            <MessageSent message="Foi" />
+            <MessageSent message="Foi" photoUser={user.photo} name={user.name}/>
           </div>
         </div>
       </div>
