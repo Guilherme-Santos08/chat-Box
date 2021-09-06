@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
   const [chat, setChat] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [dateDatabese, setDateBase] = useState([]);
-  console.log(dateDatabese)
+  // console.log(dateDatabese)
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
@@ -95,7 +95,7 @@ export function AuthProvider({ children }) {
         messageList.push({ id, ...todos[id] });
       }
       setDateBase(messageList);
-      console.log("messageList->", messageList);
+      // console.log("messageList->", messageList);
     });
   }, []);
 

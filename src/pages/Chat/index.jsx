@@ -3,7 +3,6 @@ import { MessageSent } from "../../components/Messages";
 import { ChatBox } from "./styles";
 
 import useAuth from "../../hooks/useAuth";
-import { MessageScrollBottom } from "../../components/MessageScrollBottom";
 import { useEffect, useRef } from "react";
 
 export function Chat({ name }) {
