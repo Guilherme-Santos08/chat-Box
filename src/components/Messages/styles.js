@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MessageContainer = styled.article`
+export const MessageContainer = styled.div`
   font-family: "Roboto", sans-serif;
   font-size: 0.9rem;
   line-height: 1.6;
@@ -11,25 +11,39 @@ export const MessageContainer = styled.article`
   /* flex-direction: column; */
   /* align-items: flex-end; */
   position: relative;
+  margin-top: 30px;
 
   .user {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 8px;
     span {
       color: #000;
       font-weight: 500;
-      position: absolute;
-      top: -20px;
-      right: 3.8rem;
     }
-
     img {
       width: 35px;
       height: 35px;
       border-radius: 999px;
       margin-right: 8px;
+    }
+  }
+
+  .user-sent {
+    margin-left: 8px;
+    span {
+      position: absolute;
+      top: -20px;
+      right: 3.8rem;
+    }
+  }
+
+  .user-received {
+    margin-left: 8px;
+    span {
+      position: absolute;
+      top: -20px;
+      left: 3.8rem;
     }
   }
 `;
@@ -51,7 +65,7 @@ export const MessageSentContainer = styled.div`
     height: 0;
     position: absolute;
     border-left: 32px solid transparent;
-    border-right: -2px solid transparent;    /*Faz seta "apontar para baixo. Definir o valor como 'top' fará ela "apontar para cima" */
+    border-right: -2px solid transparent; /*Faz seta "apontar para baixo. Definir o valor como 'top' fará ela "apontar para cima" */
     /*Aqui entra a cor da "aba" do balão */
     border-top: 20px solid #7e57c2;
     bottom: -10px; /*localização. Experimente alterar para 'bottom'*/

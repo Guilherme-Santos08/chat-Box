@@ -4,6 +4,7 @@ import { ChatBox } from "./styles";
 
 import useAuth from "../../hooks/useAuth";
 import { MessageScrollBottom } from "../../components/MessageScrollBottom";
+import { useEffect, useRef } from "react";
 
 export function Chat({ name }) {
   const {
@@ -14,6 +15,11 @@ export function Chat({ name }) {
     handleSendMessage,
     dateDatabese,
   } = useAuth();
+
+  const ref = useRef(null);
+  useEffect(() => {
+    ref.current.scrollTop = ref.current.scrollHeight;
+  }, [dateDatabese]);
 
   return (
     <ChatBox>
@@ -26,9 +32,39 @@ export function Chat({ name }) {
 
       <div className="container">
         <div className="">
-          <div className="chat">
-            <MessageReceived message="Veio" />
-            <MessageSent message="Foi" photoUser={user.photo} name={user.name}/>
+          <div className="chat" ref={ref}>
+            {dateDatabese.map(
+              (message, index) =>
+                message.id === user.uid ? (
+                  <MessageSent
+                    key={index}
+                    message={message.content}
+                    name={message.name}
+                    photoUser={message.avatar}
+                  />
+                ) : (
+                  <MessageReceived
+                    key={index}
+                    message={message.content}
+                    name={message.name}
+                    photoUser={message.avatar}
+                  />
+                )
+              // <MessageReceived key={index} />
+            )}
+          </div>
+          <div className="write">
+            <div className="input">
+              <textarea
+                onChange={(e) => setNewMessage(e.target.value)}
+                onSubmit={handleSendMessage}
+                value={newMessage}
+                placeholder="Digite sua menssagem"
+              />
+            </div>
+            <button type="submit" onClick={handleSendMessage}>
+              Enviar
+            </button>
           </div>
         </div>
       </div>

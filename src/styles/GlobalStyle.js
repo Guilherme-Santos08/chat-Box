@@ -6,6 +6,9 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     font-size: 16px;
     font-family: 'Roboto', sans-serif;

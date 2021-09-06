@@ -10,17 +10,20 @@ export function MessageSent({ message, photoUser, name }) {
       <MessageSentContainer>
         <div>{message}</div>
       </MessageSentContainer>
-      <div className="user">
+      <div className="user user-sent">
         <img src={photoUser} alt="foto do usuario" />
         <span>{name}</span>
       </div>
     </MessageContainer>
   );
 }
-
-export function MessageReceived({ message }) {
+export function MessageReceived({ message, photoUser, name }) {
   return (
-    <MessageContainer style={{ alignSelf: "flex-start" }}>
+    <MessageContainer style={{ alignSelf: "flex-start" }} className="teste">
+      <div className="user user-received">
+        <img src={photoUser} alt="foto do usuario" />
+        <span>{name}</span>
+      </div>
       <MessageReceivedContainer>
         <div>{message}</div>
       </MessageReceivedContainer>
