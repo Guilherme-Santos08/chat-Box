@@ -6,10 +6,13 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
-    padding: 0 10px;
+    /* padding: 0 10px; */
     background-color: #060930;
   }
 `;

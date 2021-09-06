@@ -1,9 +1,10 @@
-import { MessageReceived } from "../../components/MessageReceived";
-import { MessageSent } from "../../components/MessageSent";
+import { MessageReceived } from "../../components/Messages";
+import { MessageSent } from "../../components/Messages";
 import { ChatBox } from "./styles";
 
 import useAuth from "../../hooks/useAuth";
 import { MessageScrollBottom } from "../../components/MessageScrollBottom";
+import { useEffect, useRef } from "react";
 
 export function Chat({ name }) {
   const {
@@ -15,6 +16,11 @@ export function Chat({ name }) {
     dateDatabese,
   } = useAuth();
 
+  const ref = useRef(null);
+  useEffect(() => {
+    ref.current.scrollTop = ref.current.scrollHeight;
+  }, [dateDatabese]);
+
   return (
     <ChatBox>
       <header>
@@ -23,29 +29,42 @@ export function Chat({ name }) {
           <button onClick={() => signout()}>Deslogar</button>
         </ul>
       </header>
-      <div className="teste">
-        <div className="chat">
-          <h2>Dz ChatBox</h2>
-          <div className="messages">
-            <MessageScrollBottom
-              messages={dateDatabese.map(
-                (message, index) =>
-                  message.id === user.uid ? (
-                    <MessageSent key={index} message={message.content} />
-                  ) : (
-                    <MessageReceived key={index} message={message.content} />
-                  )
-                // <MessageReceived key={index} />
-              )}
-            />
+
+      <div className="container">
+        <div className="">
+          <div className="chat" ref={ref}>
+            {dateDatabese.map(
+              (message, index) =>
+                message.id === user.uid ? (
+                  <MessageSent
+                    key={index}
+                    message={message.content}
+                    name={message.name}
+                    photoUser={message.avatar}
+                  />
+                ) : (
+                  <MessageReceived
+                    key={index}
+                    message={message.content}
+                    name={message.name}
+                    photoUser={message.avatar}
+                  />
+                )
+              // <MessageReceived key={index} />
+            )}
           </div>
-          <div className="input">
-            <textarea
-              onChange={(e) => setNewMessage(e.target.value)}
-              value={newMessage}
-              placeholder="Digite sua menssagem"
-            />
-            <button onClick={handleSendMessage}>Enviar Menssagem</button>
+          <div className="write">
+            <div className="input">
+              <textarea
+                onChange={(e) => setNewMessage(e.target.value)}
+                onSubmit={handleSendMessage}
+                value={newMessage}
+                placeholder="Digite sua menssagem"
+              />
+            </div>
+            <button type="submit" onClick={handleSendMessage}>
+              Enviar
+            </button>
           </div>
         </div>
       </div>

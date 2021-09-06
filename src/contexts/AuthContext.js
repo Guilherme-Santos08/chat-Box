@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
   const [chat, setChat] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [dateDatabese, setDateBase] = useState([]);
+  console.log(dateDatabese)
 
   const handleUser = async (currentUser) => {
     if (currentUser) {

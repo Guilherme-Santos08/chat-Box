@@ -6,12 +6,13 @@ export const MessageContainer = styled.div`
   line-height: 1.6em;
   color: #fff;
 
-  background: #7e57c2;
+  background-color: #7e57c2;
   max-width: 286px;
+  min-width: 186px;
   height: auto;
 
   padding: 7px;
-  margin-top: 19px;
+  align-self: flex-start;
 
   border-radius: 15px;
   position: relative;

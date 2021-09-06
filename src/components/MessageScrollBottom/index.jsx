@@ -6,11 +6,16 @@ export const MessageScrollBottom = ({ messages }) => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(scrollToBottom, [messages]);
+  
+  const ref = useRef(null)
+  useEffect(() => {
+    ref.current.scrollTop = ref.current.scrollHeight
+  }, [messages])
 
   return (
     <div className="messagesWrapper">
       {messages.map((message, index) => (
-        <span key={index}>{message}</span>
+        <article key={index}>{message}</article>
       ))}
       <div ref={messagesEndRef} />
     </div>
