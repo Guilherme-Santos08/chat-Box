@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-## Por enquanto o chatBox só contem autenticação
-=======
 ## ChatBox contem autenticação e realtime databese
->>>>>>> development
 
 O que eu aprendi até aqui?
 - Autenticação com firebase
 - Usar um pouco do Realtime database
-<<<<<<< HEAD
 - pude colocar o context em prática (Distribuir informações do usuário para todo o site)
-=======
 - Colocar dados no realtime databese e pegar os dados do realtime databese
 - pude colocar o context em prática (Distribuir informações do usuário para todo o site)
 
@@ -109,4 +103,3 @@ O que eu aprendi até aqui?
 
 Tabela tirada do repositório:
 [IuriCode](https://github.com/iuricode/padroes-de-commits/blob/main/README.md)
->>>>>>> development
