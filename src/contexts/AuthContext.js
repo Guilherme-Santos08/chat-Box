@@ -19,7 +19,8 @@ export function AuthProvider({ children }) {
   const [chat, setChat] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [dateDatabese, setDateBase] = useState([]);
-  console.log(dateDatabese)
+  const [amountMessage, setAmountMessage] = useState(10);
+  // console.log(teste);
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
@@ -65,7 +66,7 @@ export function AuthProvider({ children }) {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
 
-    const result = await auth.signInWithPopup(provider);
+      const result = await auth.signInWithPopup(provider);
       handleUser(result.user);
     } catch {
       return;
@@ -85,10 +86,15 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const todoRef = firebase.database().ref("message");
+    const todoRef = firebase
+      .database()
+      .ref("message")
+      .orderByChild("age")
+      .limitToLast(amountMessage);
     todoRef.on("value", (snapshot) => {
       const todos = snapshot.val();
       const messageList = [];
@@ -96,21 +102,41 @@ export function AuthProvider({ children }) {
         messageList.push({ id, ...todos[id] });
       }
       setDateBase(messageList);
-      console.log("messageList->", messageList);
+      // console.log("messageList->", messageList);
     });
+  }, [amountMessage]);
+
+  /**
+  useEffect(() => {
+    new firebase.database()
+      .ref("message")
+      .orderByChild("age")
+      .limitToFirst(6)
+      .once("value", (snap) => {
+        snap.forEach((child) => {
+          setTeste(child.val());
+        });
+      });
   }, []);
+
+   */
 
   return (
     <AuthContext.Provider
       value={{
         signinGoogle,
         signout,
+
+        handleSendMessage,
         setNewMessage,
         newMessage,
+
         chat,
         user,
-        handleSendMessage,
         dateDatabese,
+
+        setAmountMessage,
+        amountMessage,
       }}
     >
       {children}

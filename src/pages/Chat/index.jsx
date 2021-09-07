@@ -3,23 +3,35 @@ import { MessageSent } from "../../components/Messages";
 import { ChatBox } from "./styles";
 
 import useAuth from "../../hooks/useAuth";
-import { MessageScrollBottom } from "../../components/MessageScrollBottom";
+// import { MessageScrollBottom } from "../../components/MessageScrollBottom";
 import { useEffect, useRef } from "react";
 
 export function Chat({ name }) {
   const {
     user,
     signout,
-    setNewMessage,
     newMessage,
+    setNewMessage,
     handleSendMessage,
     dateDatabese,
+    setAmountMessage,
+    amountMessage
   } = useAuth();
 
   const ref = useRef(null);
   useEffect(() => {
-    ref.current.scrollTop = ref.current.scrollHeight;
+    if(dateDatabese) {
+      ref.current.scrollTop = ref.current.scrollHeight;
+    }
   }, [dateDatabese]);
+  
+  const handleScroll = (e) => {
+    const top = e.target.scrollTop === 0 ;
+    if (top) { 
+      setAmountMessage(amountMessage + 8)
+      console.log(top)
+    }
+ }
 
   return (
     <ChatBox>
@@ -32,7 +44,7 @@ export function Chat({ name }) {
 
       <div className="container">
         <div className="">
-          <div className="chat" ref={ref}>
+          <div className="chat" ref={ref} onScroll={handleScroll}>
             {dateDatabese.map(
               (message, index) =>
                 message.id === user.uid ? (
