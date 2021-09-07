@@ -15,23 +15,32 @@ export function Chat({ name }) {
     handleSendMessage,
     dateDatabese,
     setAmountMessage,
-    amountMessage
+    amountMessage,
   } = useAuth();
 
-  const ref = useRef(null);
+  const scrollRefDown = useRef(null);
   useEffect(() => {
-    if(dateDatabese) {
-      ref.current.scrollTop = ref.current.scrollHeight;
+    scrollRefDown.current.scrollTop = scrollRefDown.current.scrollHeight;
+  }, []);
+
+  const scrollRef = useRef(null);
+  const handleScrollBottom = (e) => {
+    const bottom = (e.target.scrollHeight =
+      e.target.scrollTop === e.target.clientHeight);
+    if (bottom) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [dateDatabese]);
-  
+    return;
+  };
+
   const handleScroll = (e) => {
-    const top = e.target.scrollTop === 0 ;
-    if (top) { 
-      setAmountMessage(amountMessage + 8)
-      console.log(top)
+    const top = e.target.scrollTop === 0;
+    if (top) {
+      setAmountMessage(amountMessage + 8);
+      console.log(top);
+      return e.target.scrollTop = 1;
     }
- }
+  };
 
   return (
     <ChatBox>
@@ -44,7 +53,7 @@ export function Chat({ name }) {
 
       <div className="container">
         <div className="">
-          <div className="chat" ref={ref} onScroll={handleScroll}>
+          <div className="chat" ref={scrollRefDown} onScroll={handleScroll}>
             {dateDatabese.map(
               (message, index) =>
                 message.id === user.uid ? (
@@ -64,6 +73,7 @@ export function Chat({ name }) {
                 )
               // <MessageReceived key={index} />
             )}
+            <div onScroll={handleScrollBottom}></div>
           </div>
           <div className="write">
             <div className="input">
