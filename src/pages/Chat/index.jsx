@@ -1,8 +1,4 @@
 import useAuth from "../../hooks/useAuth";
-<<<<<<< HEAD
-import { useEffect, useRef } from "react";
-=======
->>>>>>> development
 
 import { Header } from "../../components/Header";
 import { ChatMessages } from "../../components/Chat";

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import useAuth from "../../hooks/useAuth";
-import ScrollableFeed from "react-scrollable-feed";
+// import ScrollableFeed from 'react-scrollable-feed'
 
 import { MessageReceived, MessageSent } from "../../components/Messages";
 import { ChatContainer } from "./styles.js";
@@ -35,25 +35,23 @@ export function ChatMessages() {
 
   return (
     <ChatContainer ref={scrollRefDown} onScroll={handleScroll}>
-      <ScrollableFeed>
-        {dateDatabese.map((message, index) =>
-          message.id === user.uid ? (
-            <MessageSent
-              key={index}
-              message={message.content}
-              name={message.name}
-              photoUser={message.avatar}
-            />
-          ) : (
-            <MessageReceived
-              key={index}
-              message={message.content}
-              name={message.name}
-              photoUser={message.avatar}
-            />
-          )
-        )}
-      </ScrollableFeed>
+      {dateDatabese.map((message, index) =>
+        message.id === user.uid ? (
+          <MessageSent
+            key={index}
+            message={message.content}
+            name={message.name}
+            photoUser={message.avatar}
+          />
+        ) : (
+          <MessageReceived
+            key={index}
+            message={message.content}
+            name={message.name}
+            photoUser={message.avatar}
+          />
+        )
+      )}
       <div onScroll={handleScrollBottom}></div>
     </ChatContainer>
   );
