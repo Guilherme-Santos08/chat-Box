@@ -1,57 +1,23 @@
-import { MessageReceived } from "../../components/Messages";
-import { MessageSent } from "../../components/Messages";
+import useAuth from "../../hooks/useAuth";
+<<<<<<< HEAD
+import { useEffect, useRef } from "react";
+=======
+>>>>>>> development
+
+import { Header } from "../../components/Header";
+import { ChatMessages } from "../../components/Chat";
+
 import { ChatBox } from "./styles";
 
-import useAuth from "../../hooks/useAuth";
-import { useEffect, useRef } from "react";
-
-export function Chat({ name }) {
-  const {
-    user,
-    signout,
-    setNewMessage,
-    newMessage,
-    handleSendMessage,
-    dateDatabese,
-  } = useAuth();
-
-  const ref = useRef(null);
-  useEffect(() => {
-    ref.current.scrollTop = ref.current.scrollHeight;
-  }, [dateDatabese]);
+export function Chat() {
+  const { newMessage, setNewMessage, handleSendMessage } = useAuth();
 
   return (
     <ChatBox>
-      <header>
-        <span>Bem vindo(a) {user?.name}</span>
-        <ul>
-          <button onClick={() => signout()}>Deslogar</button>
-        </ul>
-      </header>
-
+      <Header />
       <div className="container">
         <div className="">
-          <div className="chat" ref={ref}>
-            {dateDatabese.map(
-              (message, index) =>
-                message.id === user.uid ? (
-                  <MessageSent
-                    key={index}
-                    message={message.content}
-                    name={message.name}
-                    photoUser={message.avatar}
-                  />
-                ) : (
-                  <MessageReceived
-                    key={index}
-                    message={message.content}
-                    name={message.name}
-                    photoUser={message.avatar}
-                  />
-                )
-              // <MessageReceived key={index} />
-            )}
-          </div>
+          <ChatMessages />
           <div className="write">
             <div className="input">
               <textarea

@@ -18,7 +18,12 @@ export function AuthProvider({ children }) {
   const [chat, setChat] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [dateDatabese, setDateBase] = useState([]);
+<<<<<<< HEAD
   // console.log(dateDatabese)
+=======
+  const [amountMessage, setAmountMessage] = useState(20);
+  // console.log(teste);
+>>>>>>> development
 
   const handleUser = async (currentUser) => {
     if (currentUser) {
@@ -64,7 +69,7 @@ export function AuthProvider({ children }) {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
 
-    const result = await auth.signInWithPopup(provider);
+      const result = await auth.signInWithPopup(provider);
       handleUser(result.user);
     } catch {
       return;
@@ -81,13 +86,25 @@ export function AuthProvider({ children }) {
     }
   };
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
   //   return () => unsubscribe();
   // }, []);
+=======
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
+    return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+>>>>>>> development
 
   useEffect(() => {
-    const todoRef = firebase.database().ref("message");
+    const todoRef = firebase
+      .database()
+      .ref("message")
+      .orderByChild("age")
+      .limitToLast(amountMessage);
     todoRef.on("value", (snapshot) => {
       const todos = snapshot.val();
       const messageList = [];
@@ -97,19 +114,24 @@ export function AuthProvider({ children }) {
       setDateBase(messageList);
       // console.log("messageList->", messageList);
     });
-  }, []);
+  }, [amountMessage]);
 
   return (
     <AuthContext.Provider
       value={{
         signinGoogle,
         signout,
+
+        handleSendMessage,
         setNewMessage,
         newMessage,
+
         chat,
         user,
-        handleSendMessage,
         dateDatabese,
+
+        setAmountMessage,
+        amountMessage,
       }}
     >
       {children}
