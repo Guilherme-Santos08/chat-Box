@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-// import { Redirect, useHistory } from "react-router-dom";
 import cookie from "js-cookie";
 
 import { database, firebase, auth } from "../lib/firebase";
@@ -19,7 +18,7 @@ export function AuthProvider({ children }) {
   const [chat, setChat] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [dateDatabese, setDateBase] = useState([]);
-  const [amountMessage, setAmountMessage] = useState(10);
+  const [amountMessage, setAmountMessage] = useState(20);
   // console.log(teste);
 
   const handleUser = async (currentUser) => {
@@ -105,21 +104,6 @@ export function AuthProvider({ children }) {
       // console.log("messageList->", messageList);
     });
   }, [amountMessage]);
-
-  /**
-  useEffect(() => {
-    new firebase.database()
-      .ref("message")
-      .orderByChild("age")
-      .limitToFirst(6)
-      .once("value", (snap) => {
-        snap.forEach((child) => {
-          setTeste(child.val());
-        });
-      });
-  }, []);
-
-   */
 
   return (
     <AuthContext.Provider

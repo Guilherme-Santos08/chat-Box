@@ -1,80 +1,19 @@
-import { MessageReceived } from "../../components/Messages";
-import { MessageSent } from "../../components/Messages";
+import useAuth from "../../hooks/useAuth";
+
+import { Header } from "../../components/Header";
+import { ChatMessages } from "../../components/Chat";
+
 import { ChatBox } from "./styles";
 
-import useAuth from "../../hooks/useAuth";
-// import { MessageScrollBottom } from "../../components/MessageScrollBottom";
-import { useEffect, useRef } from "react";
-
-export function Chat({ name }) {
-  const {
-    user,
-    signout,
-    newMessage,
-    setNewMessage,
-    handleSendMessage,
-    dateDatabese,
-    setAmountMessage,
-    amountMessage,
-  } = useAuth();
-
-  const scrollRefDown = useRef(null);
-  useEffect(() => {
-    scrollRefDown.current.scrollTop = scrollRefDown.current.scrollHeight;
-  }, []);
-
-  const scrollRef = useRef(null);
-  const handleScrollBottom = (e) => {
-    const bottom = (e.target.scrollHeight =
-      e.target.scrollTop === e.target.clientHeight);
-    if (bottom) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-    return;
-  };
-
-  const handleScroll = (e) => {
-    const top = e.target.scrollTop === 0;
-    if (top) {
-      setAmountMessage(amountMessage + 8);
-      console.log(top);
-      return e.target.scrollTop = 1;
-    }
-  };
+export function Chat() {
+  const { newMessage, setNewMessage, handleSendMessage } = useAuth();
 
   return (
     <ChatBox>
-      <header>
-        <span>Bem vindo(a) {user?.name}</span>
-        <ul>
-          <button onClick={() => signout()}>Deslogar</button>
-        </ul>
-      </header>
-
+      <Header />
       <div className="container">
         <div className="">
-          <div className="chat" ref={scrollRefDown} onScroll={handleScroll}>
-            {dateDatabese.map(
-              (message, index) =>
-                message.id === user.uid ? (
-                  <MessageSent
-                    key={index}
-                    message={message.content}
-                    name={message.name}
-                    photoUser={message.avatar}
-                  />
-                ) : (
-                  <MessageReceived
-                    key={index}
-                    message={message.content}
-                    name={message.name}
-                    photoUser={message.avatar}
-                  />
-                )
-              // <MessageReceived key={index} />
-            )}
-            <div onScroll={handleScrollBottom}></div>
-          </div>
+          <ChatMessages />
           <div className="write">
             <div className="input">
               <textarea
